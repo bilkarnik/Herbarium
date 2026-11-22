@@ -1,159 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#FAFBFB">
-  <meta name="description" content="Хербариум — малка колекция от растителни и фармакогностични продукти.">
-  <title>Хербариум — ботаническа лаборатория</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Хербариум</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFBFB;--ink:#334155;--green:#1B4332;--teal:#2A9D8F;--line:#d5dddb;--card:#fff;--tint:#e8f3f0;color-scheme:light;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1714;--ink:#c9d3d1;--green:#9fd3b8;--teal:#4cc2b2;--line:#27413a;--card:#13211d;--tint:#193029;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1714;--ink:#c9d3d1;--green:#9fd3b8;--teal:#4cc2b2;--line:#27413a;--card:#13211d;--tint:#193029;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:1080px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:8px 24px;flex-wrap:wrap}
+.brand{font:600 30px/1 "Cormorant Garamond",Georgia,serif;color:var(--green);text-decoration:none}
+nav{display:flex;gap:2px 20px;flex:1;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+nav a.on{color:var(--green);border-color:var(--teal);font-weight:600}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.lang button{font:600 12px Inter,sans-serif;border:1px solid var(--line);background:none;color:var(--ink);padding:5px 10px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--green);color:var(--bg);border-color:var(--green)}
+main{max-width:1080px;margin:auto;padding:48px 20px 72px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;color:var(--green);font-weight:600;line-height:1.02;margin:0}
+h1{font-size:clamp(52px,11vw,112px);letter-spacing:-.015em}
+h2{font-size:clamp(32px,5vw,46px);margin:64px 0 22px}
+h3{font-size:30px}
+.lat{font:italic 500 20px "Cormorant Garamond",Georgia,serif;color:var(--teal);margin:2px 0 14px}
+.lead{font-size:18px;max-width:34em;margin:22px 0 30px}
+.btn{display:inline-block;background:var(--green);color:var(--bg);padding:12px 24px;text-decoration:none;font-weight:600;font-size:14px}
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center}
+.plate{border:1px solid var(--line);background:var(--card);padding:26px 26px 14px;text-align:center;color:var(--green)}
+.plate svg{width:100%;max-height:310px}
+.plate p{margin:10px 0 0;border-top:1px solid var(--line);padding-top:10px;font:italic 500 18px "Cormorant Garamond",Georgia,serif}
+.mono{font:600 110px/1.1 "Cormorant Garamond",Georgia,serif;padding:30px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{border:1px solid var(--line);background:var(--card);padding:20px}
+.meta{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;font-size:13px;color:var(--teal);font-weight:600}
+dl{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:14px;margin:0 0 14px}
+dt{color:var(--teal);font-weight:600}
+dd{margin:0}
+.card p:last-child{font-size:14px;margin:0}
+input{width:100%;max-width:480px;padding:12px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin:8px 0 28px}
+.cal{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:13px}
+th,td{border:1px solid var(--line);padding:8px 4px;text-align:center}
+th:first-child,td:first-child{text-align:left;padding-left:10px;white-space:nowrap}
+td.on{background:var(--teal);color:var(--bg);font-size:9px}
+th.now{background:var(--tint);color:var(--green)}
+td.now{box-shadow:inset 0 0 0 2px var(--green)}
+.big{font:500 clamp(24px,4vw,38px) "Cormorant Garamond",Georgia,serif;color:var(--green);word-break:break-all}
+footer{border-top:1px solid var(--line);padding:26px 20px;max-width:1080px;margin:auto;font-size:13px}
+footer p{margin:0 0 4px}
+.row{display:grid;grid-template-columns:1fr 2fr;gap:6px 28px;padding:18px 0;border-top:1px solid var(--line)}.row h3{font-size:26px}.row p{margin:0}
+.hl{border-color:var(--teal);box-shadow:inset 0 3px 0 var(--teal)}.sub{font-size:14px;margin:6px 0 0}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px;margin:24px 0}.form label{font-size:13px;font-weight:600;color:var(--teal)}.form input{margin:4px 0 0;max-width:none;color:var(--ink);font-weight:400}
+.months{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:24px}.months label{font-size:14px}.months input{width:auto;margin:0 5px 0 0}
+textarea{width:100%;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:13px/1.5 ui-monospace,Menlo,monospace;margin:12px 0}
+ol{padding-left:20px;max-width:40em}
+@media(max-width:720px){.hero{grid-template-columns:1fr;gap:28px}.plate{max-width:280px}.row{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <div class="announcement"><span data-i18n="announcement">Растения, знание и внимание към детайла.</span><span class="announcement-mark">✳</span></div>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Хербариум — начало">
-      <span class="brand-mark">h<span>✳</span></span>
-      <span class="brand-name">Хербариум<small>BOTANICAL NOTES & EXTRACTS</small></span>
-    </a>
-    <button class="menu-toggle" aria-label="Отвори меню" aria-expanded="false">☰</button>
-    <nav class="main-nav" aria-label="Основна навигация">
-      <a href="#home" data-i18n="navHome">Начало</a>
-      <a href="#products" data-i18n="navProducts">Продукти</a>
-      <a href="#seasonal" data-i18n="navSeasonal">Сезонни</a>
-      <a href="#about" data-i18n="navAbout">За мен</a>
-      <a href="#contact" data-i18n="navContact">Свържете се</a>
-    </nav>
-    <button class="lang-switch" id="languageToggle" aria-label="Switch language">EN <span>↗</span></button>
-  </header>
+<header><div class="bar">
+<a class="brand" href="#home" id="brand"></a><nav id="nav"></nav>
+<div class="lang"><button data-l="bg">БГ</button> <button data-l="en">EN</button></div>
+</div></header>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script>
+/* =====================================================================
+   ✎ РЕДАКТИРАЙТЕ ТУК / EDIT HERE
+   Добавяне на продукт: копирайте един блок в PRODUCTS и сменете текстовете.
+   Махане на продукт: изтрийте целия му блок { ... }.
+   months = месеци на беритба (1 = януари … 12 = декември).
+   ===================================================================== */
+const SITE={
+  email:"hello@herbarium.example",
+  social:[{name:"Instagram",url:"https://instagram.com/"}],
+  person:{bg:"Георги Златанов",en:"Georgi Zlatanov"},
+  role:{bg:"Студент по фармация, Софийски университет „Св. Климент Охридски“",en:"Pharmacy student, Sofia University “St. Kliment Ohridski”"},
+  bio:{
+    bg:["Хербариум е личен проект, в който събирам и подреждам знания за лекарствените растения и техните суровини — от латинското название и използваната част до активните съставки и времето за беритба.","Целта е да бъде ясен и полезен справочник по фармакогнозия."],
+    en:["Herbarium is a personal project where I collect and organise knowledge about medicinal plants and their drugs — from the Latin name and the part used to the active constituents and harvest time.","The aim is a clear, useful pharmacognosy reference."]},
+  dirs:[
+   {bg:{t:"Фармакогнозия",d:"Основно направление"},en:{t:"Pharmacognosy",d:"Main focus"}},
+   {bg:{t:"Козметична технология",d:"Правене на козметика"},en:{t:"Cosmetic technology",d:"Making cosmetics"}},
+   {bg:{t:"Фармацевтична технология",d:"Лекарствени форми — мехлеми, балсами и други"},en:{t:"Pharmaceutical technology",d:"Dosage forms — ointments, balms and more"}}],
+  make:[
+   {bg:{t:"Водни растителни извлеци",d:"Изследване на разтворимостта на растителните компоненти."},en:{t:"Aqueous plant extracts",d:"Studying the solubility of plant constituents."}},
+   {bg:{t:"Глицеринови извлеци",d:"Изучаване на свойствата на глицеринова екстракционна среда."},en:{t:"Glycerin extracts",d:"Studying the properties of glycerin as an extraction medium."}},
+   {bg:{t:"Растителни прахове",d:"Подготовка и характеризиране на суровини."},en:{t:"Herbal powders",d:"Preparing and characterising raw materials."}},
+   {bg:{t:"Кремове и емулсии",d:"Крем за ръце и тяло, билков крем, хидратиращи емулсии, кремове с глицерин и растителни екстракти."},en:{t:"Creams and emulsions",d:"Hand and body cream, herbal cream, moisturising emulsions, creams with glycerin and plant extracts."}},
+   {bg:{t:"Екстракти и тинктури",d:"Водни извлеци, глицеринови извлеци, маслени мацерати."},en:{t:"Extracts and tinctures",d:"Aqueous extracts, glycerin extracts, oil macerates."}},
+   {bg:{t:"Балсами и мехлеми",d:"Балсам с пчелен восък, маслени билкови балсами."},en:{t:"Balms and ointments",d:"Beeswax balm, herbal oil balms."}},
+   {bg:{t:"Други форми",d:"Течни сапунени форми, козметични гелове, глицеринови разтвори."},en:{t:"Other forms",d:"Liquid soap forms, cosmetic gels, glycerin solutions."}},
+   {bg:{t:"Водни разтвори и ароматни продукти",d:"Ароматизирани водни разтвори (eau de parfum, eau de toilette, parfum), глицеринови смеси, прости козметични смеси."},en:{t:"Aqueous solutions and fragrance products",d:"Aromatised aqueous solutions (eau de parfum, eau de toilette, parfum), glycerin mixtures, simple cosmetic mixtures."}}]
+};
+const PRODUCTS=[
+ {latin:"Mentha × piperita L.",drug:"Menthae piperitae folium",family:"Lamiaceae",months:[6,7,8],
+  bg:{name:"Мента",part:"лист",compounds:"етерично масло (ментол), флавоноиди",desc:"Многогодишно ароматно растение. Листата се берат преди и в началото на цъфтежа."},
+  en:{name:"Peppermint",part:"leaf",compounds:"essential oil (menthol), flavonoids",desc:"A perennial aromatic herb. Leaves are picked before and at the start of flowering."}},
+ {latin:"Matricaria chamomilla L.",drug:"Matricariae flos",family:"Asteraceae",months:[5,6,7],
+  bg:{name:"Лайка",part:"цветни кошнички",compounds:"етерично масло (бисаболол, хамазулен), флавоноиди",desc:"Едногодишно растение. Събират се цветните кошнички по време на пълен цъфтеж."},
+  en:{name:"Chamomile",part:"flower heads",compounds:"essential oil (bisabolol, chamazulene), flavonoids",desc:"An annual herb. The flower heads are collected at full bloom."}},
+ {latin:"Calendula officinalis L.",drug:"Calendulae flos",family:"Asteraceae",months:[6,7,8,9],
+  bg:{name:"Невен",part:"цветни кошнички",compounds:"тритерпенови сапонини, каротеноиди, флавоноиди",desc:"Цветните кошнички се берат на няколко пъти през лятото."},
+  en:{name:"Calendula",part:"flower heads",compounds:"triterpene saponins, carotenoids, flavonoids",desc:"The flower heads are picked several times during the summer."}},
+ {latin:"Tilia cordata Mill.",drug:"Tiliae flos",family:"Malvaceae",months:[6,7],
+  bg:{name:"Липа",part:"съцветия",compounds:"флавоноиди, слузести вещества, етерично масло",desc:"Събират се съцветията заедно със съцветния листец в пълен цъфтеж."},
+  en:{name:"Linden",part:"inflorescences",compounds:"flavonoids, mucilage, essential oil",desc:"Inflorescences are collected with their bract at full bloom."}},
+ {latin:"Hypericum perforatum L.",drug:"Hyperici herba",family:"Hypericaceae",months:[6,7,8],
+  bg:{name:"Жълт кантарион",part:"цъфтящи връхчета",compounds:"хиперицин, хиперфорин, флавоноиди",desc:"Бере се цъфтящата връхна част на стъблото. Известен с лекарствени взаимодействия — консултирайте се със специалист."},
+  en:{name:"St John’s wort",part:"flowering tops",compounds:"hypericin, hyperforin, flavonoids",desc:"The flowering tops of the stem are collected. Known for drug interactions — consult a professional."}},
+ {latin:"Rosa canina L.",drug:"Rosae pseudofructus",family:"Rosaceae",months:[9,10],
+  bg:{name:"Шипка",part:"плод",compounds:"витамин C, каротеноиди, флавоноиди",desc:"Бере се напълно узрелият лъжлив плод наесен."},
+  en:{name:"Rose hip",part:"fruit",compounds:"vitamin C, carotenoids, flavonoids",desc:"The fully ripe false fruit is picked in autumn."}}
+];
+const I={
+ bg:{home:"Начало",products:"Продукти",seasonal:"Сезонни",about:"За мен",contact:"Свържете се",
+  lead:"Личен каталог на лечебни растения и фармакогностични суровини — с латински названия, съставки и календар на беритбата.",
+  browse:"Разгледай продуктите",now:"В сезон сега",feat:"Избрани продукти",
+  drug:"Дрога",part:"Част",compounds:"Съставки",season:"Беритба",
+  search:"Търси по име или латинско название",none:"Няма намерени продукти. Опитайте с друга дума.",count:"продукта в каталога",
+  calH:"Календар на беритбата",calP:"Месеците, в които се събира всяка суровина. Текущият месец е очертан.",noneNow:"Този месец няма продукти в сезон.",
+  contactP:"Имате въпрос или предложение за нов продукт? Пишете ми.",write:"Пишете ми на имейл",follow:"Профили",
+  foot:"Съдържанието е с образователна цел и не замества съвет от лекар или фармацевт.",
+  canH:"Какво мога да правя",canP:"Лабораторията ми е насочена към три направления и обхваща следните работи.",
+  add:"Добави продукт",addP:"Помощник за добавяне на нови продукти и цветя в каталога — без да пишете код.",
+  s1:"Попълнете полетата и отметнете месеците на беритба. Образецът се показва на живо най-отдолу.",s2:"Натиснете „Копирай кода“.",
+  s3:"Изпратете ми копирания код в чата с думите „Добави този продукт“. Ако редактирате файла сами, поставете кода в списъка PRODUCTS, преди затварящата скоба ].",
+  rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на продукта във файла.",
+  mons:"Месеци на беритба",code:"Готов код",copy:"Копирай кода",copied:"Копирано",prev:"Преглед"},
+ en:{home:"Home",products:"Products",seasonal:"Seasonal",about:"About me",contact:"Contact",
+  lead:"A personal catalogue of medicinal plants and pharmacognostic drugs — with Latin names, constituents and a harvest calendar.",
+  browse:"Browse products",now:"In season now",feat:"Featured products",
+  drug:"Drug",part:"Part used",compounds:"Constituents",season:"Harvest",
+  search:"Search by name or Latin name",none:"No products found. Try another word.",count:"products in the catalogue",
+  calH:"Harvest calendar",calP:"The months in which each drug is collected. The current month is outlined.",noneNow:"Nothing is in season this month.",
+  contactP:"Have a question or a suggestion for a new product? Write to me.",write:"Email me",follow:"Profiles",
+  foot:"Content is for educational purposes and does not replace advice from a doctor or pharmacist.",
+  canH:"What I can make",canP:"My lab covers three focus areas and the following kinds of work.",
+  add:"Add a product",addP:"A helper for adding new products and flowers to the catalogue — no coding needed.",
+  s1:"Fill in the fields and tick the harvest months. The specimen appears live at the bottom.",s2:"Press “Copy code”.",
+  s3:"Send me the copied code in the chat with the words “Add this product”. If you edit the file yourself, paste the code into the PRODUCTS list, before the closing bracket ].",
+  rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the product’s whole block in the file.",
+  mons:"Harvest months",code:"Ready code",copy:"Copy code",copied:"Copied",prev:"Preview"}
+};
+/* ===================== край на редактируемата част ===================== */
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="heroEyebrow">ФАРМАКОГНОЗИЯ · БОТАНИКА · РАСТИТЕЛНИ ИЗВЛЕЦИ</span></p>
-        <h1 data-i18n-html="heroTitle">Природата,<br><em>изследвана</em><br>с внимание.</h1>
-        <p class="hero-description" data-i18n="heroText">Хербариум е пространство за растителни суровини, внимателно подбрани съставки и любопитство към богатството на ботаническия свят.</p>
-        <div class="hero-actions">
-          <a class="button button-dark" href="#products"><span data-i18n="exploreProducts">Разгледайте продуктите</span><span>↗</span></a>
-          <a class="text-link" href="#about" data-i18n="ourApproach">Нашият подход</a>
-        </div>
-        <div class="hero-footnote"><span class="tiny-seal">✳</span><span data-i18n="heroFoot">МАЛКИ ПАРТИДИ · РАСТИТЕЛНО ВДЪХНОВЕНИ · СЪЗДАДЕНИ С ГРИЖА</span></div>
-      </div>
-      <div class="hero-art" aria-label="Ботаническа композиция">
-        <div class="art-label art-label-top">HERBARIUM / VOL. 01</div>
-        <div class="botanical-plate">
-          <div class="plate-ring"></div>
-          <svg viewBox="0 0 440 560" role="img" aria-label="Стилизирана ботаническа илюстрация">
-            <path class="stem" d="M222 500 C210 410 248 330 218 230 C205 175 213 110 188 55"/>
-            <path class="stem thin" d="M221 390 C160 335 122 267 103 193"/>
-            <path class="stem thin" d="M225 350 C290 302 326 237 337 162"/>
-            <path class="stem thin" d="M211 280 C160 230 150 180 153 130"/>
-            <path class="stem thin" d="M229 240 C280 205 295 150 287 95"/>
-            <g class="leaf"><path d="M190 320 C116 319 78 277 79 229 C137 227 183 260 190 320Z"/><path d="M88 237 Q140 270 184 308"/></g>
-            <g class="leaf light"><path d="M242 358 C310 360 365 321 373 269 C317 259 264 295 242 358Z"/><path d="M361 278 Q306 310 251 346"/></g>
-            <g class="leaf"><path d="M207 246 C142 221 116 171 132 126 C184 145 213 190 207 246Z"/><path d="M139 137 Q177 183 203 234"/></g>
-            <g class="leaf light"><path d="M236 230 C292 212 327 166 318 119 C270 131 238 174 236 230Z"/><path d="M313 128 Q276 177 240 221"/></g>
-            <g class="leaf"><path d="M202 172 C151 137 141 90 164 52 C207 80 222 126 202 172Z"/><path d="M170 62 Q193 112 200 164"/></g>
-            <g class="flower"><circle cx="218" cy="62" r="17"/><circle cx="218" cy="62" r="7"/></g>
-            <g class="seed"><circle cx="102" cy="193" r="5"/><circle cx="337" cy="162" r="5"/><circle cx="153" cy="130" r="4"/><circle cx="287" cy="95" r="4"/></g>
-          </svg>
-          <div class="plate-caption"><span>BOTANICAL STUDY</span><span>№ 001 — FOLIUM</span></div>
-        </div>
-        <div class="art-label art-label-bottom">COLLECT · STUDY · CREATE</div>
-        <div class="hero-stamp">EST.<br>2026</div>
-      </div>
-      <div class="hero-side-note">A CLOSER LOOK AT THE NATURAL WORLD</div>
-    </section>
+let L="bg";try{L=localStorage.getItem("lang")||"bg"}catch(e){}
+const t=k=>I[L][k],$=s=>document.querySelector(s),now=new Date().getMonth()+1;
+const mon=m=>new Date(2026,m-1,1).toLocaleDateString(L==="bg"?"bg-BG":"en-GB",{month:"short"});
+const pad=n=>String(n).padStart(2,"0");
+const range=a=>a.length?mon(Math.min(...a))+"–"+mon(Math.max(...a)):"—";
+const card=(p,i)=>{const c=p[L];return `<article class="card" data-q="${(p.bg.name+" "+p.en.name+" "+p.latin+" "+p.drug).toLowerCase()}"><div class="meta"><span>№ ${pad(i+1)}</span><span>${p.family}</span></div><h3>${c.name}</h3><p class="lat">${p.latin}</p><dl><dt>${t("drug")}</dt><dd><i>${p.drug}</i></dd><dt>${t("part")}</dt><dd>${c.part}</dd><dt>${t("compounds")}</dt><dd>${c.compounds}</dd><dt>${t("season")}</dt><dd>${range(p.months)}</dd></dl><p>${c.desc}</p></article>`};
+const cards=list=>`<div class="grid">${list.map(p=>card(p,PRODUCTS.indexOf(p))).join("")}</div>`;
+const plant=`<svg viewBox="0 0 200 260" aria-hidden="true"><g fill="var(--teal)" fill-opacity=".16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path fill="none" d="M100 252C98 190 104 120 100 30"/><path d="M100 205C70 205 48 188 40 160C70 160 94 176 100 205Z"/><path d="M100 175C130 175 152 158 160 130C130 130 106 146 100 175Z"/><path d="M100 135C74 133 56 118 50 94C76 96 96 110 100 135Z"/><path d="M100 100C124 98 140 84 146 62C122 64 104 76 100 100Z"/><path d="M100 60C88 48 90 28 100 12C110 28 112 48 100 60Z"/></g></svg>`;
 
-    <section class="intro-strip">
-      <span class="strip-symbol">✳</span>
-      <p data-i18n="stripText">Всяко растение има своя история. Ние започваме с това да я опознаем.</p>
-      <span class="strip-index">01 / 05</span>
-    </section>
-
-    <section class="section products-section" id="products">
-      <div class="section-heading">
-        <div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="collectionEyebrow">КОЛЕКЦИЯТА</span></p><h2 data-i18n-html="productsTitle">От растението<br><em>до продукта.</em></h2></div>
-        <p class="section-intro" data-i18n="productsIntro">Разгледайте подбрани растителни материали и продукти. Всеки артикул има собствен профил с информация за състава и произхода.</p>
-      </div>
-      <div class="filter-row">
-        <span data-i18n="browseCollection">РАЗГЛЕДАЙТЕ КОЛЕКЦИЯТА</span>
-        <div class="filters" id="filters">
-          <button class="filter active" data-filter="all" data-i18n="filterAll">Всички</button>
-          <button class="filter" data-filter="extract" data-i18n="filterExtracts">Извлеци</button>
-          <button class="filter" data-filter="botanical" data-i18n="filterBotanical">Растителни</button>
-          <button class="filter" data-filter="care" data-i18n="filterCare">Грижа</button>
-        </div>
-      </div>
-      <div class="product-grid" id="productGrid" aria-live="polite"></div>
-      <p class="catalog-note" data-i18n="catalogNote">Колекцията е примерна. Наличност, състав и предназначение се потвърждават за всеки продукт.</p>
-    </section>
-
-    <section class="seasonal-section" id="seasonal">
-      <div class="seasonal-image">
-        <div class="seasonal-orbit"></div>
-        <div class="seasonal-botanical">✳</div>
-        <span class="seasonal-image-note">SEASONAL HERBARIUM / 02</span>
-      </div>
-      <div class="seasonal-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="seasonEyebrow">СЕЗОНЕН ФОКУС</span></p>
-        <h2 data-i18n-html="seasonTitle">Ритъмът на<br><em>сезоните.</em></h2>
-        <p data-i18n="seasonText">Всеки сезон носи различни растения, аромати и възможности за наблюдение. Тук представяме сезонни акценти, ботанически бележки и малки тематични серии.</p>
-        <a class="button button-outline" href="#seasonal-list"><span data-i18n="seeSeasonal">Вижте сезонните акценти</span><span>↗</span></a>
-        <div class="seasonal-list" id="seasonal-list">
-          <div><span>01</span><strong data-i18n="seasonItem1">Късна есен · корени и семена</strong><i>↗</i></div>
-          <div><span>02</span><strong data-i18n="seasonItem2">Ботанически бележник</strong><i>↗</i></div>
-          <div><span>03</span><strong data-i18n="seasonItem3">Следваща сезонна серия</strong><i>↗</i></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-section section" id="about">
-      <div class="about-left">
-        <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="aboutEyebrow">ЗА ХЕРБАРИУМ</span></p>
-        <h2 data-i18n-html="aboutTitle">Любопитство,<br><em>превърнато в грижа.</em></h2>
-        <div class="about-quote">“</div>
-        <p class="about-quote-text" data-i18n="aboutQuote">Най-доброто начало е внимателното наблюдение.</p>
-      </div>
-      <div class="about-right">
-        <p data-i18n="aboutText1">Хербариум е независим ботанически проект, посветен на фармакогнозията и практическото опознаване на растенията. Тук традиционното растително знание среща съвременния интерес към състава, качеството и приложението на растителните суровини.</p>
-        <p data-i18n="aboutText2">Проектът се развива постепенно — с внимание към документацията, прозрачността и отговорното представяне на всеки продукт.</p>
-        <div class="signature"><span>Х</span><small data-i18n="signature">Основател · Хербариум</small></div>
-        <a class="text-link" href="#contact" data-i18n="getInTouch">Свържете се с мен ↗</a>
-      </div>
-    </section>
-
-    <section class="values-band">
-      <div><span>01</span><strong data-i18n="value1">Растителен произход</strong><small data-i18n="value1s">Внимание към суровината</small></div>
-      <div><span>02</span><strong data-i18n="value2">Документиран подход</strong><small data-i18n="value2s">Информация за продукта</small></div>
-      <div><span>03</span><strong data-i18n="value3">Малки серии</strong><small data-i18n="value3s">Грижа към детайла</small></div>
-    </section>
-
-    <section class="contact-section section" id="contact">
-      <div class="contact-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="contactEyebrow">ДА ЗАПОЧНЕМ РАЗГОВОР</span></p>
-        <h2 data-i18n-html="contactTitle">Имате въпрос?<br><em>Пишете ми.</em></h2>
-        <p data-i18n="contactText">За въпроси относно продуктите, сътрудничество или просто разговор за растенията — ще се радвам да се свържете с мен.</p>
-        <a class="contact-email" href="mailto:hello@herbarium.bg">hello@herbarium.bg <span>↗</span></a>
-      </div>
-      <form class="contact-form" id="contactForm">
-        <label><span data-i18n="formName">Вашето име</span><input required name="name" autocomplete="name" placeholder="Име"></label>
-        <label><span data-i18n="formEmail">Имейл адрес</span><input required type="email" name="email" autocomplete="email" placeholder="name@example.com"></label>
-        <label><span data-i18n="formMessage">Съобщение</span><textarea required name="message" rows="4" placeholder="..."></textarea></label>
-        <button class="button button-dark" type="submit"><span data-i18n="sendMessage">Изпратете съобщение</span><span>↗</span></button>
-        <p class="form-hint" data-i18n="formHint">Формата отваря вашето имейл приложение. За автоматично изпращане е необходима имейл услуга или бекенд.</p>
-      </form>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <a class="brand footer-brand" href="#home"><span class="brand-mark">h<span>✳</span></span><span class="brand-name">Хербариум<small>BOTANICAL NOTES & EXTRACTS</small></span></a>
-    <p data-i18n="footerNote">Растителен свят. Внимателно изследван.</p>
-    <div class="footer-bottom"><span>© <span id="year"></span> HERBARIUM</span><span data-i18n="footerLegal">Информацията на сайта не замества медицински съвет.</span><a href="#home" data-i18n="backTop">НАГОРЕ ↑</a></div>
-  </footer>
-  <script src="products.js"></script>
-  <script src="app.js"></script>
+const R={
+ home(){const live=PRODUCTS.filter(p=>p.months.includes(now));
+  return `<section class="hero"><div><h1>${L==="bg"?"Хербариум":"Herbarium"}</h1><p class="lead">${t("lead")}</p><a class="btn" href="#products">${t("browse")}</a></div>
+  <div class="plate">${plant}<p>${PRODUCTS[0].latin}</p></div></section>
+  <h2>${live.length?t("now"):t("feat")}</h2>${cards((live.length?live:PRODUCTS).slice(0,3))}`},
+ products(){return `<h1>${t("products")}</h1><p class="lead">${PRODUCTS.length} ${t("count")}</p>
+  <input id="q" type="search" placeholder="${t("search")}" aria-label="${t("search")}">${cards(PRODUCTS)}<p id="none" hidden>${t("none")}</p>`},
+ seasonal(){const live=PRODUCTS.filter(p=>p.months.includes(now)),M=[1,2,3,4,5,6,7,8,9,10,11,12];
+  return `<h1>${t("seasonal")}</h1><p class="lead">${t("calP")}</p>
+  <h2 style="margin-top:8px">${t("now")}</h2>${live.length?cards(live):`<p>${t("noneNow")}</p>`}
+  <h2>${t("calH")}</h2><div class="cal"><table><thead><tr><th></th>${M.map(m=>`<th class="${m===now?"now":""}">${mon(m)}</th>`).join("")}</tr></thead><tbody>
+  ${PRODUCTS.map(p=>`<tr><td>${p[L].name}</td>${M.map(m=>`<td class="${p.months.includes(m)?"on":""} ${m===now?"now":""}">${p.months.includes(m)?"●":""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`},
+ about(){const n=SITE.person[L];
+  return `<section class="hero"><div><h1>${n}</h1><p class="lat" style="font-size:24px;margin-top:14px">${SITE.role[L]}</p>${SITE.bio[L].map(b=>`<p class="lead" style="margin:16px 0">${b}</p>`).join("")}</div>
+  <div class="plate"><div class="mono">${n.split(" ").map(w=>w[0]).join("")}</div><p>${L==="bg"?"Хербариум":"Herbarium"}</p></div></section><h2>${t("canH")}</h2><p class="lead" style="margin:0 0 24px">${t("canP")}</p><div class="grid">${SITE.dirs.map((d,i)=>`<div class="card${i?"":" hl"}"><h3 style="font-size:26px">${d[L].t}</h3><p class="sub">${d[L].d}</p></div>`).join("")}</div><div style="margin-top:36px">${SITE.make.map(m=>`<div class="row"><h3>${m[L].t}</h3><p>${m[L].d}</p></div>`).join("")}</div>`},
+ add(){return `<h1>${t("add")}</h1><p class="lead">${t("addP")}</p>
+  <ol><li>${t("s1")}</li><li>${t("s2")}</li><li>${t("s3")}</li></ol><p>${t("rm")}</p>
+  <div class="form">${FIELDS.map(f=>`<label>${f[L==="bg"?1:2]}<input data-k="${f[0]}" value="${(draft[f[0]]||"").replace(/"/g,"&quot;")}"></label>`).join("")}</div>
+  <p class="lat" style="margin:0 0 8px">${t("mons")}</p><div class="months">${[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>`<label><input type="checkbox" data-m="${m}"${draft.months.includes(m)?" checked":""}>${mon(m)}</label>`).join("")}</div>
+  <h2 style="margin-top:8px">${t("code")}</h2><textarea id="out" rows="9" readonly></textarea><button class="btn" id="cp" style="border:0;cursor:pointer">${t("copy")}</button>
+  <h2>${t("prev")}</h2><div class="grid" id="pv"></div>`},
+ contact(){return `<h1>${t("contact")}</h1><p class="lead">${t("contactP")}</p>
+  <p class="big"><a href="mailto:${SITE.email}" style="color:inherit">${SITE.email}</a></p><p><a class="btn" href="mailto:${SITE.email}">${t("write")}</a></p>
+  ${SITE.social.length?`<h2>${t("follow")}</h2><p>${SITE.social.map(s=>`<a href="${s.url}" target="_blank" rel="noopener" style="color:var(--green);margin-right:18px">${s.name}</a>`).join("")}</p>`:""}`}
+};
+const draft={months:[]};
+const FIELDS=[["latin","Латинско название","Latin name"],["drug","Дрога (латински)","Drug (Latin)"],["family","Семейство","Family"],["nameBg","Име (български)","Name (Bulgarian)"],["nameEn","Име (английски)","Name (English)"],["partBg","Част (български)","Part used (Bulgarian)"],["partEn","Част (английски)","Part used (English)"],["compBg","Съставки (български)","Constituents (Bulgarian)"],["compEn","Съставки (английски)","Constituents (English)"],["descBg","Описание (български)","Description (Bulgarian)"],["descEn","Описание (английски)","Description (English)"]];
+function bindAdd(){
+  const J=JSON.stringify,d=draft,out=$("#out");
+  const upd=()=>{const m=d.months.slice().sort((a,b)=>a-b),v=k=>d[k]||"";
+    const p={latin:v("latin"),drug:v("drug"),family:v("family"),months:m,bg:{name:v("nameBg"),part:v("partBg"),compounds:v("compBg"),desc:v("descBg")},en:{name:v("nameEn"),part:v("partEn"),compounds:v("compEn"),desc:v("descEn")}};
+    const o=x=>`name:${J(x.name)},part:${J(x.part)},compounds:${J(x.compounds)},desc:${J(x.desc)}`;
+    out.value=` {latin:${J(p.latin)},drug:${J(p.drug)},family:${J(p.family)},months:[${m}],\n  bg:{${o(p.bg)}},\n  en:{${o(p.en)}}},`;
+    $("#pv").innerHTML=card(p,PRODUCTS.length)};
+  document.querySelectorAll("[data-k]").forEach(i=>i.oninput=()=>{d[i.dataset.k]=i.value;upd()});
+  document.querySelectorAll("[data-m]").forEach(i=>i.onchange=()=>{const m=+i.dataset.m;d.months=d.months.filter(x=>x!==m);if(i.checked)d.months.push(m);upd()});
+  $("#cp").onclick=e=>{out.select();try{navigator.clipboard.writeText(out.value)}catch(x){document.execCommand("copy")}e.target.textContent=t("copied");setTimeout(()=>e.target.textContent=t("copy"),1800)};
+  upd();
+}
+function render(){
+  const k=(location.hash||"#home").slice(1),pg=R[k]?k:"home",name=L==="bg"?"Хербариум":"Herbarium";
+  $("#brand").textContent=name;
+  $("#nav").innerHTML=["home","products","seasonal","about","contact"].map(p=>`<a href="#${p}" class="${p===pg?"on":""}">${t(p)}</a>`).join("");
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
+  $("#app").innerHTML=R[pg]();
+  $("#foot").innerHTML=`<p>© ${new Date().getFullYear()} ${name}</p><p>${t("foot")}</p><p><a href="#add" style="color:var(--teal)">${t("add")}</a></p>`;
+  document.documentElement.lang=L;document.title=name+" — "+t(pg);if(pg==="add")bindAdd();
+  const q=$("#q");if(q)q.oninput=()=>{const v=q.value.trim().toLowerCase();let n=0;
+    document.querySelectorAll(".card").forEach(c=>{const h=!c.dataset.q.includes(v);c.hidden=h;if(!h)n++});$("#none").hidden=n>0};
+}
+document.querySelector(".lang").onclick=e=>{const l=e.target.dataset.l;if(!l)return;L=l;try{localStorage.setItem("lang",l)}catch(x){}render()};
+addEventListener("hashchange",()=>{render();scrollTo(0,0)});
+render();
+</script>
 </body>
 </html>
