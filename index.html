@@ -60,6 +60,7 @@
         textarea{width:100%;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:13px/1.5 ui-monospace,Menlo,monospace;margin:12px 0}
         ol{padding-left:20px;max-width:40em}
         .card ul,.card ol{padding-left:18px;margin:0 0 12px;font-size:14px}.card li{margin:3px 0}.k{font-size:13px;font-weight:600;color:var(--teal);margin:12px 0 4px}
+        .form textarea{margin:4px 0 0;width:100%;font:14px/1.5 Inter,sans-serif;color:var(--ink)}
         @media(max-width:720px){.hero{grid-template-columns:1fr;gap:28px}.plate{max-width:280px}.row{grid-template-columns:1fr}}
     </style>
 </head>
@@ -184,7 +185,8 @@
             rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на продукта във файла.",
             mons:"Месеци на беритба",code:"Готов код",copy:"Копирай кода",copied:"Копирано",prev:"Преглед",use:"Използва се за",
             make:"Правене",makeOf:"Правене на",makeP:"Стъпка по стъпка: как се приготвят препарати от дрогите в каталога.",needK:"Необходимо",stepsK:"Стъпки",
-            prepNote:"Методиките са примерни и с учебна цел. Спазвайте лабораторните правила и носете предпазни очила."},
+            prepNote:"Методиките са примерни и с учебна цел. Спазвайте лабораторните правила и носете предпазни очила.",
+            addMake:"Добави правене",addMakeP:"Попълнете полетата за нова методика — всяка съставка и всяка стъпка на нов ред. Готовият код добавете в списъка PREPS или ми го пратете с „Добави това правене“."},
         en:{home:"Home",products:"Products",seasonal:"Seasonal",about:"About me",contact:"Contact",
             lead:"A personal catalogue of medicinal plants and pharmacognostic drugs — with Latin names, constituents and a harvest calendar.",
             browse:"Browse products",now:"In season now",feat:"Featured products",
@@ -200,12 +202,14 @@
             rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the product’s whole block in the file.",
             mons:"Harvest months",code:"Ready code",copy:"Copy code",copied:"Copied",prev:"Preview",use:"Used for",
             make:"Making",makeOf:"Making",makeP:"Step by step: how to prepare products from the drugs in the catalogue.",needK:"You need",stepsK:"Steps",
-            prepNote:"The methods are examples for study purposes. Follow lab rules and wear safety glasses."}
+            prepNote:"The methods are examples for study purposes. Follow lab rules and wear safety glasses.",
+            addMake:"Add a preparation",addMakeP:"Fill in the fields for a new method — one ingredient and one step per line. Add the finished code to the PREPS list or send it to me with “Add this preparation”.",
+        }
     };
     /* ===================== край на редактируемата част ===================== */
 
     let L="bg";try{L=localStorage.getItem("lang")||"bg"}catch(e){}
-    const t=k=>I[L][k],$=s=>document.querySelector(s),now=new Date().getMonth()+1;
+    const t=k=>I[L][k]??I.bg[k]??k,$=s=>document.querySelector(s),now=new Date().getMonth()+1;
     const mon=m=>new Date(2026,m-1,1).toLocaleDateString(L==="bg"?"bg-BG":"en-GB",{month:"short"});
     const pad=n=>String(n).padStart(2,"0");
     const range=a=>a.length?mon(Math.min(...a))+"–"+mon(Math.max(...a)):"—";
@@ -234,8 +238,12 @@
   <div class="form">${FIELDS.map(f=>`<label>${f[L==="bg"?1:2]}<input data-k="${f[0]}" value="${(draft[f[0]]||"").replace(/"/g,"&quot;")}"></label>`).join("")}</div>
   <p class="lat" style="margin:0 0 8px">${t("mons")}</p><div class="months">${[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>`<label><input type="checkbox" data-m="${m}"${draft.months.includes(m)?" checked":""}>${mon(m)}</label>`).join("")}</div>
   <h2 style="margin-top:8px">${t("code")}</h2><textarea id="out" rows="9" readonly></textarea><button class="btn" id="cp" style="border:0;cursor:pointer">${t("copy")}</button>
-  <h2>${t("prev")}</h2><div class="grid" id="pv"></div>`},
-        contact(){return `<h1>${t("contact")}</h1><p class="lead">${t("contactP")}</p>
+  <h2>${t("prev")}</h2><div class="grid" id="pv"></div>
+  <h2 style="margin-top:72px">${t('addMake')}</h2><p class="lead">${t('addMakeP')}</p>
+  <div class="form">${FIELDS2.map(f=>`<label>${f[L==='bg'?1:2]}${f[3]?`<textarea data-j="${f[0]}" rows="4">${(draft2[f[0]]||'').replace(/</g,'&lt;')}</textarea>`:`<input data-j="${f[0]}" value="${(draft2[f[0]]||'').replace(/"/g,'&quot;')}">`}</label>`).join('')}</div>
+  <h2 style="margin-top:8px">${t('code')}</h2><textarea id="out2" rows="9" readonly></textarea><button class="btn" id="cp2" style="border:0;cursor:pointer">${t('copy')}</button>
+  <h2>${t('prev')}</h2><div class="grid" id="pv2"></div>`},
+  contact(){return `<h1>${t("contact")}</h1><p class="lead">${t("contactP")}</p>
   <p class="big"><a href="mailto:${SITE.email}" style="color:inherit">${SITE.email}</a></p><p><a class="btn" href="mailto:${SITE.email}">${t("write")}</a></p>
   ${SITE.social.length?`<h2>${t("follow")}</h2><p>${SITE.social.map(s=>`<a href="${s.url}" target="_blank" rel="noopener" style="color:var(--green);margin-right:18px">${s.name}</a>`).join("")}</p>`:""}`}
     };
@@ -251,8 +259,32 @@
         document.querySelectorAll("[data-k]").forEach(i=>i.oninput=()=>{d[i.dataset.k]=i.value;upd()});
         document.querySelectorAll("[data-m]").forEach(i=>i.onchange=()=>{const m=+i.dataset.m;d.months=d.months.filter(x=>x!==m);if(i.checked)d.months.push(m);upd()});
         $("#cp").onclick=e=>{out.select();try{navigator.clipboard.writeText(out.value)}catch(x){document.execCommand("copy")}e.target.textContent=t("copied");setTimeout(()=>e.target.textContent=t("copy"),1800)};
+        upd();bindPrep();
+    }
+
+    const draft2={};
+    const FIELDS2=[
+        ['drug','Дрога (латинско име, както в продукта)','Drug (Latin name, as in the product)'],
+        ['nameBg','Име на методиката (български)','Method name (Bulgarian)'],
+        ['nameEn','Име на методиката (английски)','Method name (English)'],
+        ['needBg','Необходимо (български), по един ред','You need (Bulgarian), one per line',1],
+        ['needEn','Необходимо (английски), по един ред','You need (English), one per line',1],
+        ['stepsBg','Стъпки (български), по един ред','Steps (Bulgarian), one per line',1],
+        ['stepsEn','Стъпки (английски), по един ред','Steps (English), one per line',1],
+        ['noteBg','Бележка (български)','Note (Bulgarian)'],
+        ['noteEn','Бележка (английски)','Note (English)']];
+    const prepCard=(m,i)=>{const c=m[L],p=PRODUCTS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t('makeOf')} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:''}<p class="k">${t('needK')}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join('')}</ul><p class="k">${t('stepsK')}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join('')}</ol><p>${c.note}</p></article>`};
+    function bindPrep(){
+        const J=JSON.stringify,d=draft2,out=$('#out2'),v=k=>(d[k]||'').trim(),ls=k=>(d[k]||'').split('\n').map(x=>x.trim()).filter(Boolean);
+        const upd=()=>{const o=s=>({name:v('name'+s),need:ls('need'+s),steps:ls('steps'+s),note:v('note'+s)}),m={drug:v('drug'),bg:o('Bg'),en:o('En')};
+            const f=x=>`name:${J(x.name)},need:${J(x.need)},steps:${J(x.steps)},note:${J(x.note)}`;
+            out.value=` {drug:${J(m.drug)},\n  bg:{${f(m.bg)}},\n  en:{${f(m.en)}}},`;
+            $('#pv2').innerHTML=prepCard(m,PREPS.length)};
+        document.querySelectorAll('[data-j]').forEach(i=>i.oninput=()=>{d[i.dataset.j]=i.value;upd()});
+        $('#cp2').onclick=e=>{out.select();try{navigator.clipboard.writeText(out.value)}catch(x){document.execCommand('copy')}e.target.textContent=t('copied');setTimeout(()=>e.target.textContent=t('copy'),1800)};
         upd();
     }
+
     function render(){
         const k=(location.hash||"#home").slice(1),pg=R[k]?k:"home",name=L==="bg"?"Хербариум":"Herbarium";
         $("#brand").textContent=name;
