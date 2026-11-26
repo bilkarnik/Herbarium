@@ -63,6 +63,7 @@
         .form textarea{margin:4px 0 0;width:100%;font:14px/1.5 Inter,sans-serif;color:var(--ink)}
         @media(max-width:720px){.hero{grid-template-columns:1fr;gap:28px}.plate{max-width:280px}.row{grid-template-columns:1fr}}
     </style>
+<link rel="icon" href="icon.ico">
 </head>
 <body>
 <header><div class="bar">
@@ -288,7 +289,7 @@
     function render(){
         const k=(location.hash||"#home").slice(1),pg=R[k]?k:"home",name=L==="bg"?"Хербариум":"Herbarium";
         $("#brand").textContent=name;
-        $("#nav").innerHTML=["home","products","seasonal","make","about","contact"].map(p=>`<a href="#${p}" class="${p===pg?"on":""}">${t(p)}</a>`).join("");
+        $("#nav").innerHTML=["home","products","seasonal","make","about","contact"].map(p=>`<a href="#${p}" class="${p===pg?"on":""}">${t(p)}</a>`).join("")+`<a href="experiments.html">${L==="bg"?"Експерименти":"Experiments"}</a>`;
         document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
         $("#app").innerHTML=R[pg]();
         $("#foot").innerHTML=`<p>© ${new Date().getFullYear()} ${name}</p><p>${t("foot")}</p><p><a href="#add" style="color:var(--teal)">${t("add")}</a></p>`;
