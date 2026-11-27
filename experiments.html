@@ -18,12 +18,15 @@ h1{font-size:clamp(48px,9vw,84px)}h2{font-size:32px;margin:6px 0 10px}.lead,.sub
 section{border-top:1px solid var(--line);padding:24px 0}section p{white-space:pre-line;margin:0}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-block;padding:11px 22px;background:var(--green);color:var(--bg);text-decoration:none;font-size:14px;font-weight:600}.btn.alt{background:transparent;color:var(--green);border:1px solid var(--line)}
 footer{border-top:1px solid var(--line);padding:24px 22px;font-size:13px;max-width:1080px;margin:auto}
+input{width:100%;max-width:480px;padding:12px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin:0 0 24px}input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 </style></head>
 <body>
 <header><div class="bar"><a class="brand" href="index.html">Хербариум</a><nav><a href="index.html" data-bg="← Начало" data-en="← Home">← Начало</a></nav><div class="lang"><button data-lang="bg" aria-pressed="true">БГ</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
 <main><h1 data-bg="Експерименти" data-en="Experiments">Експерименти</h1>
 <p class="lead" data-bg="Индекс на експерименталната работа в Хербариум. Изберете експеримент, за да отворите неговия протокол." data-en="Index of experimental work at Herbarium. Select an experiment to open its protocol.">Индекс на експерименталната работа в Хербариум. Изберете експеримент, за да отворите неговия протокол.</p>
-<div class="list" id="list"></div></main>
+<input id="q" type="search">
+<div class="list" id="list"></div>
+<p id="none" hidden data-bg="Няма намерени експерименти. Опитайте с друга дума." data-en="No experiments found. Try another word."></p></main>
 <footer>© <span id="year"></span> Хербариум</footer>
 <script src="experiments.js"></script>
 <script>
@@ -33,14 +36,21 @@ function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=
 function setLang(l){L=l;document.documentElement.lang=l;document.querySelectorAll("[data-bg][data-en]").forEach(x=>x.textContent=x.dataset[l]);document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l));try{localStorage.setItem("lang",l)}catch(e){}render()}
 document.querySelector(".lang").addEventListener("click",e=>{if(e.target.dataset.lang)setLang(e.target.dataset.lang)});
 document.getElementById("year").textContent=new Date().getFullYear();
+const flat=o=>typeof o==="string"?o:Object.values(o||{}).map(flat).join(" ");
 function render(){
-  const root=document.getElementById("list");root.replaceChildren();
+  const root=document.getElementById("list"),qi=document.getElementById("q"),v=qi.value.trim().toLowerCase();
+  const ph=L==="bg"?"Търси експеримент по заглавие, номер или текст":"Search experiments by title, number or text";
+  qi.placeholder=ph;qi.setAttribute("aria-label",ph);
+  root.replaceChildren();let n=0;
   (window.HERBARIUM_EXPERIMENTS||[]).forEach(x=>{
+    const {page,...rest}=x;if(v&&!flat(rest).toLowerCase().includes(v))return;n++;
     const a=el("a","item");a.href=x.page;
     const m=el("div","meta");m.append(el("span","","№ "+x.number),el("span","",x.id));
     const f=el("div","foot");f.append(el("span","status",tr(x.status)),el("span","open",L==="bg"?"Отвори експеримента →":"Open experiment →"));
     a.append(m,el("h2","",tr(x.title)),el("p","desc",tr(x.subtitle)),f);root.append(a);
   });
+  document.getElementById("none").hidden=n>0||!v;
 }
+document.getElementById("q").addEventListener("input",render);
 setLang(L);
 </script></body></html>
