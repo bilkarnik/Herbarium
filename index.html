@@ -72,12 +72,13 @@
 </div></header>
 <main id="app"></main>
 <footer id="foot"></footer>
+<script src="herbs.js"></script>
+<script src="preps.js"></script>
 <script>
     /* =====================================================================
        ✎ РЕДАКТИРАЙТЕ ТУК / EDIT HERE
-       Добавяне на билки: копирайте един блок в HERBS и сменете текстовете.
-       Махане на билки: изтрийте целия му блок { ... }.
-       months = месеци на беритба (1 = януари … 12 = декември).
+       Билки: herbs.js  |  Правене: preps.js  |  Експерименти: experiments.js
+       В този файл са личните данни (SITE) и текстовете на сайта (I).
        ===================================================================== */
     const SITE={
         email:"bilkarnik.contact@gmail.com",
@@ -101,110 +102,44 @@
             {bg:{t:"Други форми",d:"Течни сапунени форми, козметични гелове, глицеринови разтвори."},en:{t:"Other forms",d:"Liquid soap forms, cosmetic gels, glycerin solutions."}},
             {bg:{t:"Водни разтвори и ароматни продукти",d:"Ароматизирани водни разтвори (eau de parfum, eau de toilette, parfum), глицеринови смеси, прости козметични смеси."},en:{t:"Aqueous solutions and fragrance products",d:"Aromatised aqueous solutions (eau de parfum, eau de toilette, parfum), glycerin mixtures, simple cosmetic mixtures."}}]
     };
-    const HERBS=[
-        {latin:"Mentha × piperita L.",drug:"Menthae piperitae folium",family:"Lamiaceae",months:[6,7,8],
-            bg:{name:"Мента",part:"лист",compounds:"етерично масло (ментол), флавоноиди",use:"традиционно при храносмилателен дискомфорт; ароматизатор",desc:"Многогодишно ароматно растение. Листата се берат преди и в началото на цъфтежа."},
-            en:{name:"Peppermint",part:"leaf",compounds:"essential oil (menthol), flavonoids",use:"traditionally for digestive discomfort; flavouring",desc:"A perennial aromatic herb. Leaves are picked before and at the start of flowering."}},
-        {latin:"Matricaria chamomilla L.",drug:"Matricariae flos",family:"Asteraceae",months:[5,6,7],
-            bg:{name:"Лайка",part:"цветни кошнички",compounds:"етерично масло (бисаболол, хамазулен), флавоноиди",use:"традиционно при стомашно-чревен дискомфорт; външно при кожни и лигавични дразнения",desc:"Едногодишно растение. Събират се цветните кошнички по време на пълен цъфтеж."},
-            en:{name:"Chamomile",part:"flower heads",compounds:"essential oil (bisabolol, chamazulene), flavonoids",use:"traditionally for gastrointestinal discomfort; externally for skin and mucosal irritation",desc:"An annual herb. The flower heads are collected at full bloom."}},
-        {latin:"Calendula officinalis L.",drug:"Calendulae flos",family:"Asteraceae",months:[6,7,8,9],
-            bg:{name:"Невен",part:"цветни кошнички",compounds:"тритерпенови сапонини, каротеноиди, флавоноиди",use:"традиционно външно при дребни рани и кожни дразнения",desc:"Цветните кошнички се берат на няколко пъти през лятото."},
-            en:{name:"Calendula",part:"flower heads",compounds:"triterpene saponins, carotenoids, flavonoids",use:"traditionally, externally, for minor wounds and skin irritation",desc:"The flower heads are picked several times during the summer."}},
-        {latin:"Tilia cordata Mill.",drug:"Tiliae flos",family:"Malvaceae",months:[6,7],
-            bg:{name:"Липа",part:"съцветия",compounds:"флавоноиди, слузести вещества, етерично масло",use:"традиционно при простуда, като потогонно средство",desc:"Събират се съцветията заедно със съцветния листец в пълен цъфтеж."},
-            en:{name:"Linden",part:"inflorescences",compounds:"flavonoids, mucilage, essential oil",use:"traditionally for colds, as a diaphoretic",desc:"Inflorescences are collected with their bract at full bloom."}},
-        {latin:"Hypericum perforatum L.",drug:"Hyperici herba",family:"Hypericaceae",months:[6,7,8],
-            bg:{name:"Жълт кантарион",part:"цъфтящи връхчета",compounds:"хиперицин, хиперфорин, флавоноиди",use:"традиционно при леко потиснато настроение; взаимодейства с много лекарства",desc:"Бере се цъфтящата връхна част на стъблото. Известен с лекарствени взаимодействия — консултирайте се със специалист."},
-            en:{name:"St John’s wort",part:"flowering tops",compounds:"hypericin, hyperforin, flavonoids",use:"traditionally for mildly low mood; interacts with many medicines",desc:"The flowering tops of the stem are collected. Known for drug interactions — consult a professional."}},
-        {latin:"Rosa canina L.",drug:"Rosae pseudofructus",family:"Rosaceae",months:[9,10],
-            bg:{name:"Шипка",part:"плод",compounds:"витамин C, каротеноиди, флавоноиди",use:"източник на витамин C; традиционно при простуда",desc:"Бере се напълно узрелият лъжлив плод наесен."},
-            en:{name:"Rose hip",part:"fruit",compounds:"vitamin C, carotenoids, flavonoids",use:"a source of vitamin C; traditionally for colds",desc:"The fully ripe false fruit is picked in autumn."}},
-        {latin:"Salvia officinalis L.",drug:"Salviae officinalis folium",family:"Lamiaceae",months:[5,6,7],
-            bg:{name:"Градински чай (жълфия)",part:"листа",compounds:"етерично масло (туйон, 1,8-цинеол, камфор), розмаринова киселина, флавоноиди, дитерпени",use:"традиционно при възпаления на устата и гърлото (гаргара), при леко храносмилателно разстройство и прекомерно изпотяване",desc:"Многогодишен ароматен полухраст със сиво-зелени космати листа. Листата се берат преди и в началото на цъфтежа. Не се препоръчва при бременност и продължителна употреба заради туйона."},
-            en:{name:"Sage",part:"leaves",compounds:"essential oil (thujone, 1,8-cineole, camphor), rosmarinic acid, flavonoids, diterpenes",use:"traditionally for mouth and throat inflammation (gargle), mild digestive discomfort and excessive sweating",desc:"A perennial aromatic subshrub with grey-green hairy leaves. The leaves are picked before and at the start of flowering. Not recommended in pregnancy or for long-term use because of thujone."}},
-        {latin:"Valeriana officinalis L.",drug:"Valerianae radix",family:"Caprifoliaceae (old: Valerianaceae)",months:[9,10],
-            bg:{name:"Валериана",part:"коренища с корени",compounds:"етерично масло (борнил изовалерат), валеренова киселина, валепотриати, аминокиселини",use:"традиционно при лека нервна възбуда и затруднено заспиване",desc:"Многогодишен тревисто растение, чиито корени имат характерна силна миризма. Коренищата се изкопават наесен и се сушат внимателно."},
-            en:{name:"Valerian",part:"rhizomes with roots",compounds:"essential oil (bornyl isovalerate), valerenic acid, valepotriates, amino acids",use:"traditionally for mild nervous tension and difficulty falling asleep",desc:"A perennial herb whose roots have a characteristic strong smell. The rhizomes are dug up in autumn and dried carefully."}},
-        {latin:"Plantago lanceolata L.",drug:"Plantaginis lanceolatae folium",family:"Plantaginaceae",months:[5,6,7,8],
-            bg:{name:"Теснолист живовляк",part:"листа",compounds:"иридоидни гликозиди (аукубин, каталпол), слузести вещества, флавоноиди, танини",use:"традиционно при кашлица и дразнене на лигавицата на устата и гърлото",desc:"Многогодишно растение с розетка от тесни листа и класовидно съцветие. Листата се берат през лятото."},
-            en:{name:"Ribwort plantain",part:"leaves",compounds:"iridoid glycosides (aucubin, catalpol), mucilage, flavonoids, tannins",use:"traditionally for cough and irritation of the mouth and throat lining",desc:"A perennial plant with a rosette of narrow leaves and spike-like flower head. The leaves are picked in summer."}},
-        {latin:"Echinacea purpurea (L.) Moench",drug:"Echinaceae purpureae herba",family:"Asteraceae",months:[7,8,9],
-            bg:{name:"Ехинацея (пурпурна)",part:"надземна част (цъфтящите върхове)",compounds:"кафеоилови производни (цикорова киселина), алкиламиди, полизахариди, флавоноиди",use:"традиционно за краткотрайна подкрепа при настинка",desc:"Многогодишно растение с едри розово-пурпурни цветни кошнички с изпъкнала средина. Не се препоръчва при автоимунни заболявания без консултация със специалист."},
-            en:{name:"Purple coneflower",part:"aerial parts (flowering tops)",compounds:"caffeoyl derivatives (cichoric acid), alkylamides, polysaccharides, flavonoids",use:"traditionally for short-term support during the common cold",desc:"A perennial plant with large pink-purple flower heads with a raised centre. Not recommended in autoimmune diseases without professional advice."}},
-        {latin:"Silybum marianum (L.) Gaertn.",drug:"Silybi mariani fructus",family:"Asteraceae",months:[7,8],
-            bg:{name:"Бял трън",part:"плодове",compounds:"флаволигнани (силимарин: силибинин, силикристин, силидианин), мастно масло",use:"традиционно при лек храносмилателен дискомфорт и като подкрепа при леки чернодробно-жлъчни оплаквания",desc:"Бодливо едногодишно или двугодишно растение с бели жилки по листата и пурпурни цветове. Събират се зрелите плодове."},
-            en:{name:"Milk thistle",part:"fruits (achenes)",compounds:"flavonolignans (silymarin: silibinin, silychristin, silydianin), fatty oil",use:"traditionally for mild digestive discomfort and as support in minor liver and bile complaints",desc:"A spiny annual or biennial plant with white veins on the leaves and purple flowers. The ripe fruits are collected."}},
-        {latin:"Foeniculum vulgare Mill.",drug:"Foeniculi fructus",family:"Apiaceae",months:[8,9],
-            bg:{name:"Резене",part:"плодове",compounds:"етерично масло (анетол, фенхон), мастно масло, флавоноиди",use:"традиционно при газове и леки спазми в храносмилателния тракт, както и като отхрачващо при кашлица",desc:"Високо ароматно растение с перести листа и жълти сенници. Плодовете се берат, когато узреят."},
-            en:{name:"Fennel",part:"fruits",compounds:"essential oil (anethole, fenchone), fatty oil, flavonoids",use:"traditionally for gas and mild digestive spasms, and as an expectorant for cough",desc:"A tall aromatic plant with feathery leaves and yellow umbels. The fruits are collected when ripe."}},
-        {latin:"Althaea officinalis L.",drug:"Althaeae radix",family:"Malvaceae",months:[9,10],
-            bg:{name:"Бял слез",part:"корен",compounds:"слузести вещества (полизахариди), нишесте, пектини, флавоноиди",use:"традиционно при суха кашлица и дразнене на лигавицата на гърлото",desc:"Многогодишно растение с кадифено космати листа и бледорозови цветове. Корените се изкопават наесен."},
-            en:{name:"Marshmallow",part:"root",compounds:"mucilage (polysaccharides), starch, pectins, flavonoids",use:"traditionally for dry cough and irritation of the throat lining",desc:"A perennial plant with velvety hairy leaves and pale pink flowers. The roots are dug up in autumn."}},
-        {latin:"Ginkgo biloba L.",drug:"Ginkgo folium",family:"Ginkgoaceae",months:[8,9],
-            bg:{name:"Гинко",part:"листа",compounds:"флавоноидни гликозиди (кверцетин, кемпферол), терпенови лактони (гинколиди, билобалид)",use:"стандартизирани екстракти се използват при леки нарушения на паметта и вниманието и за подобряване на периферното кръвообращение",desc:"Дърво („жива вкаменелост“) с ветрилообразни двуделни листа. Листата се берат зелени, в края на лятото. Взаимодейства с антикоагуланти."},
-            en:{name:"Ginkgo",part:"leaves",compounds:"flavonoid glycosides (quercetin, kaempferol), terpene lactones (ginkgolides, bilobalide)",use:"standardised extracts are used for mild memory and attention problems and to support peripheral circulation",desc:"A tree (“living fossil”) with fan-shaped, two-lobed leaves. The leaves are picked green in late summer. Interacts with anticoagulants."}},
-        {latin:"Achillea millefolium L.",drug:"Millefolii herba",family:"Asteraceae",months:[6,7,8],
-            bg:{name:"Бял равнец",part:"цъфтящи връхни части",compounds:"етерично масло (1,8-цинеол, камфор, хамазулен), флавоноиди, горчиви вещества, танини",use:"традиционно при липса на апетит и леки спазми в храносмилателния тракт; външно при дребни рани",desc:"Многогодишно растение с фино разделени листа и щитовидни съцветия от дребни бели кошнички. Връхните части се берат през лятото."},
-            en:{name:"Yarrow",part:"flowering tops",compounds:"essential oil (1,8-cineole, camphor, chamazulene), flavonoids, bitter principles, tannins",use:"traditionally for loss of appetite and mild digestive spasms; externally for minor wounds",desc:"A perennial plant with finely divided leaves and flat-topped clusters of small white flower heads. The tops are picked in summer."}},
-        {latin:"Crataegus monogyna Jacq.",drug:"Crataegi folium cum flore",family:"Rosaceae",months:[4,5],
-            bg:{name:"Глог (едностъблен)",part:"листа с цветове",compounds:"флавоноиди (хиперозид, виекснин), олигомерни процианидини, триптерпенови киселини",use:"традиционно при леко „нервно сърце“ и временно усещане за сърцебиене",desc:"Бодлив храст или малко дърво с бели цветове и червени плодове. Цъфтящите клонки се берат напролет. Сърдечните оплаквания изискват преглед при лекар."},
-            en:{name:"Hawthorn",part:"leaves with flowers",compounds:"flavonoids (hyperoside, vitexin), oligomeric procyanidins, triterpene acids",use:"traditionally for mild “nervous heart” complaints and temporary palpitations",desc:"A thorny shrub or small tree with white flowers and red fruits. The flowering twigs are picked in spring. Heart complaints need a medical check-up."}},
-    ];
+    const HERBS=window.HERBARIUM_HERBS||[];   // данните са в herbs.js
 
-    /* ✎ ПРАВЕНЕ (методики). За нова методика копирайте един блок и сменете текстовете.
-       drug = латинското име на дрогата от HERBS (връзка към билката); need = списък; steps = стъпки. */
-    const PREPS=[
-        {drug:"Matricariae flos",
-            bg:{name:"запарка от лайка",need:["10 г лайка (Matricariae flos), едро натрошена","100 мл вода","водна баня, везна, цедка"],
-                steps:["Претеглете дрогата и я сложете в подходящ съд.","Залейте с гореща вода и покрийте.","Загрявайте на водна баня 15 минути, като разбърквате от време на време.","Оставете да се охлади на стайна температура около 45 минути.","Прецедете и допълнете с вода до 100 мл."],
-                note:"Съотношение 1:10. Приготвя се прясно и се съхранява на хладно не повече от 48 часа."},
-            en:{name:"chamomile infusion",need:["10 g chamomile (Matricariae flos), coarsely crushed","100 mL water","water bath, balance, strainer"],
-                steps:["Weigh the drug and place it in a suitable vessel.","Pour over hot water and cover.","Heat in a water bath for 15 minutes, stirring from time to time.","Let it cool at room temperature for about 45 minutes.","Strain and make up to 100 mL with water."],
-                note:"Ratio 1:10. Prepare fresh and keep cool for no more than 48 hours."}},
-        {drug:"Calendulae flos",
-            bg:{name:"маслен мацерат от невен",need:["20 г суха невен (Calendulae flos)","100 мл растително масло (напр. маслиново)","стъклен буркан, цедка или марля, тъмен флакон"],
-                steps:["Използвайте напълно суха дрога, иначе маслото може да се развали.","Сложете невена в буркана и го залейте с маслото, докато е напълно покрит.","Затворете и оставете на топло и тъмно за 2–4 седмици, като разклащате всеки ден.","Прецедете през марля и изстискайте добре.","Оставете да се утаи и прелейте в тъмен флакон."],
-                note:"Съотношение 1:5. Съхранявайте на хладно и тъмно и етикетирайте с дата."},
-            en:{name:"calendula oil macerate",need:["20 g dried calendula (Calendulae flos)","100 mL vegetable oil (e.g. olive oil)","glass jar, strainer or gauze, dark bottle"],
-                steps:["Use fully dry material, otherwise the oil may spoil.","Put the calendula in the jar and cover it completely with the oil.","Close and keep in a warm, dark place for 2–4 weeks, shaking daily.","Strain through gauze and squeeze well.","Let it settle and pour into a dark bottle."],
-                note:"Ratio 1:5. Store in a cool, dark place and label with the date."}}
-    ];
+    const PREPS=window.HERBARIUM_PREPS||[];   // данните са в preps.js
     const I={
         bg:{home:"Начало",herbs:"Билки",seasonal:"Сезонни",about:"За мен",contact:"Свържете се",
             lead:"Личен каталог на лечебни растения и фармакогностични суровини — с латински названия, съставки и календар на беритбата.",
             browse:"Разгледай билките",now:"В сезон сега",feat:"Избрани билки",
             drug:"Дрога",part:"Част",compounds:"Съставки",season:"Беритба",
-            search:"Търси по име или латинско название",none:"Няма намерени билки. Опитайте с друга дума.",count:"билки в каталога",
+            search:"Търси по име или латинско название",none:"Няма намерени билки. Опитайте с друга дума.",count:"билки в каталога",searchMake:"Търси методика по име, билка или съставка",noneMake:"Няма намерени методики. Опитайте с друга дума.",
             calH:"Календар на беритбата",calP:"Месеците, в които се събира всяка суровина. Текущият месец е очертан.",noneNow:"Този месец няма билки в сезон.",
             contactP:"Имате въпрос или предложение за нова билки или нещо друго? Пишете ми.",write:"Пишете ми на имейл",follow:"Профили",
             foot:"Съдържанието е с образователна цел и не замества съвет от лекар или фармацевт.",
             canH:"Какво мога да правя",canP:"Лабораторията ми е насочена към три направления и обхваща следните работи.",
             add:"Добави билка или правене",addP:"Помощник за добавяне на нови билки и цветя в каталога — без да пишете код.",
             s1:"Попълнете полетата и отметнете месеците на беритба. Образецът се показва на живо най-отдолу.",s2:"Натиснете „Копирай кода“.",
-            s3:"Изпратете ми копирания код в чата с думите „Добави тази билка“. Ако редактирате файла сами, поставете кода в списъка HERBS, преди затварящата скоба ].",
+            s3:"Изпратете ми копирания код в чата с думите „Добави тази билка“. Ако редактирате файла сами, поставете кода в списъка в herbs.js, преди затварящата скоба ].",
             rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на билката във файла.",
             mons:"Месеци на беритба",code:"Готов код",copy:"Копирай кода",copied:"Копирано",prev:"Преглед",use:"Използва се за",
             make:"Правене",makeOf:"Правене на",makeP:"Стъпка по стъпка: как се приготвят препарати от дрогите в каталога.",needK:"Необходимо",stepsK:"Стъпки",
             prepNote:"Методиките са примерни и с учебна цел. Спазвайте лабораторните правила и носете предпазни очила.",
-            addMake:"Добави правене",addMakeP:"Попълнете полетата за нова методика — всяка съставка и всяка стъпка на нов ред. Готовият код добавете в списъка PREPS или ми го пратете с „Добави това правене“."},
+            addMake:"Добави правене",addMakeP:"Попълнете полетата за нова методика — всяка съставка и всяка стъпка на нов ред. Готовият код добавете в списъка в preps.js или ми го пратете с „Добави това правене“."},
         en:{home:"Home",herbs:"Herbs",seasonal:"Seasonal",about:"About me",contact:"Contact",
             lead:"A personal catalogue of medicinal plants and pharmacognostic drugs — with Latin names, constituents and a harvest calendar.",
             browse:"Browse herbs",now:"In season now",feat:"Featured herbs",
             drug:"Drug",part:"Part used",compounds:"Constituents",season:"Harvest",
-            search:"Search by name or Latin name",none:"No herbs found. Try another word.",count:"herbs in the catalogue",
+            search:"Search by name or Latin name",none:"No herbs found. Try another word.",count:"herbs in the catalogue",searchMake:"Search methods by name, herb or ingredient",noneMake:"No methods found. Try another word.",
             calH:"Harvest calendar",calP:"The months in which each drug is collected. The current month is outlined.",noneNow:"Nothing is in season this month.",
             contactP:"Have a question or a suggestion for a new herb or something else? Write to me.",write:"Email me",follow:"Profiles",
             foot:"Content is for educational purposes and does not replace advice from a doctor or pharmacist.",
             canH:"What I can make",canP:"My lab covers three focus areas and the following kinds of work.",
             add:"Add a herb or a making",addP:"A helper for adding new herbs and flowers to the catalogue — no coding needed.",
             s1:"Fill in the fields and tick the harvest months. The specimen appears live at the bottom.",s2:"Press “Copy code”.",
-            s3:"Send me the copied code in the chat with the words “Add this herb”. If you edit the file yourself, paste the code into the HERBS list, before the closing bracket ].",
+            s3:"Send me the copied code in the chat with the words “Add this herb”. If you edit the file yourself, paste the code into the list in herbs.js, before the closing bracket ].",
             rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the herb’s whole block in the file.",
             mons:"Harvest months",code:"Ready code",copy:"Copy code",copied:"Copied",prev:"Preview",use:"Used for",
             make:"Making",makeOf:"Making",makeP:"Step by step: how to prepare herbs from the drugs in the catalogue.",needK:"You need",stepsK:"Steps",
             prepNote:"The methods are examples for study purposes. Follow lab rules and wear safety glasses.",
-            addMake:"Add a preparation",addMakeP:"Fill in the fields for a new method — one ingredient and one step per line. Add the finished code to the PREPS list or send it to me with “Add this preparation”.",
+            addMake:"Add a preparation",addMakeP:"Fill in the fields for a new method — one ingredient and one step per line. Add the finished code to the list in preps.js or send it to me with “Add this preparation”.",
         }
     };
     /* ===================== край на редактируемата част ===================== */
@@ -233,7 +168,7 @@
         about(){const n=SITE.person[L];
             return `<section class="hero"><div><h1>${n}</h1><p class="lat" style="font-size:24px;margin-top:14px">${SITE.role[L]}</p>${SITE.bio[L].map(b=>`<p class="lead" style="margin:16px 0">${b}</p>`).join("")}</div>
   <div class="plate"><div class="mono">${n.split(" ").map(w=>w[0]).join("")}</div><p>${L==="bg"?"Хербариум":"Herbarium"}</p></div></section><h2>${t("canH")}</h2><p class="lead" style="margin:0 0 24px">${t("canP")}</p><div class="grid">${SITE.dirs.map((d,i)=>`<div class="card${i?"":" hl"}"><h3 style="font-size:26px">${d[L].t}</h3><p class="sub">${d[L].d}</p></div>`).join("")}</div><div style="margin-top:36px">${SITE.make.map(m=>`<div class="row"><h3>${m[L].t}</h3><p>${m[L].d}</p></div>`).join("")}</div>`},
-        make(){return `<h1>${t("make")}</h1><p class="lead">${t("makeP")}</p><div class="grid">${PREPS.map((m,i)=>{const c=m[L],p=HERBS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t("makeOf")} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:""}<p class="k">${t("needK")}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join("")}</ul><p class="k">${t("stepsK")}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join("")}</ol><p>${c.note}</p></article>`}).join("")}</div><p class="sub" style="margin-top:28px">${t("prepNote")}</p>`},
+        make(){return `<h1>${t("make")}</h1><p class="lead">${t("makeP")}</p><input id="q" type="search" placeholder="${t("searchMake")}" aria-label="${t("searchMake")}"><div class="grid">${PREPS.map((m,i)=>{const c=m[L],p=HERBS.find(x=>x.drug===m.drug),q=[m.drug,p&&p.latin,p&&p.bg.name,p&&p.en.name,...["bg","en"].flatMap(l=>[m[l].name,...m[l].need,...m[l].steps,m[l].note])].filter(Boolean).join(" ").toLowerCase().replace(/"/g,"&quot;");return `<article class="card" data-q="${q}"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t("makeOf")} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:""}<p class="k">${t("needK")}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join("")}</ul><p class="k">${t("stepsK")}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join("")}</ol><p>${c.note}</p></article>`}).join("")}</div><p id="none" hidden>${t("noneMake")}</p><p class="sub" style="margin-top:28px">${t("prepNote")}</p>`},
         add(){return `<h1>${t("add")}</h1><p class="lead">${t("addP")}</p>
   <ol><li>${t("s1")}</li><li>${t("s2")}</li><li>${t("s3")}</li></ol><p>${t("rm")}</p>
   <div class="form">${FIELDS.map(f=>`<label>${f[L==="bg"?1:2]}<input data-k="${f[0]}" value="${(draft[f[0]]||"").replace(/"/g,"&quot;")}"></label>`).join("")}</div>
