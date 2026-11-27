@@ -75,7 +75,7 @@
 <script>
     /* =====================================================================
        ✎ РЕДАКТИРАЙТЕ ТУК / EDIT HERE
-       Добавяне на продукт: копирайте един блок в PRODUCTS и сменете текстовете.
+       Добавяне на продукт: копирайте един блок в HERBS и сменете текстовете.
        Махане на продукт: изтрийте целия му блок { ... }.
        months = месеци на беритба (1 = януари … 12 = декември).
        ===================================================================== */
@@ -101,7 +101,7 @@
             {bg:{t:"Други форми",d:"Течни сапунени форми, козметични гелове, глицеринови разтвори."},en:{t:"Other forms",d:"Liquid soap forms, cosmetic gels, glycerin solutions."}},
             {bg:{t:"Водни разтвори и ароматни продукти",d:"Ароматизирани водни разтвори (eau de parfum, eau de toilette, parfum), глицеринови смеси, прости козметични смеси."},en:{t:"Aqueous solutions and fragrance products",d:"Aromatised aqueous solutions (eau de parfum, eau de toilette, parfum), glycerin mixtures, simple cosmetic mixtures."}}]
     };
-    const PRODUCTS=[
+    const HERBS=[
         {latin:"Mentha × piperita L.",drug:"Menthae piperitae folium",family:"Lamiaceae",months:[6,7,8],
             bg:{name:"Мента",part:"лист",compounds:"етерично масло (ментол), флавоноиди",use:"традиционно при храносмилателен дискомфорт; ароматизатор",desc:"Многогодишно ароматно растение. Листата се берат преди и в началото на цъфтежа."},
             en:{name:"Peppermint",part:"leaf",compounds:"essential oil (menthol), flavonoids",use:"traditionally for digestive discomfort; flavouring",desc:"A perennial aromatic herb. Leaves are picked before and at the start of flowering."}},
@@ -153,7 +153,7 @@
     ];
 
     /* ✎ ПРАВЕНЕ (методики). За нова методика копирайте един блок и сменете текстовете.
-       drug = латинското име на дрогата от PRODUCTS (връзка към продукта); need = списък; steps = стъпки. */
+       drug = латинското име на дрогата от HERBS (връзка към продукта); need = списък; steps = стъпки. */
     const PREPS=[
         {drug:"Matricariae flos",
             bg:{name:"запарка от лайка",need:["10 г лайка (Matricariae flos), едро натрошена","100 мл вода","водна баня, везна, цедка"],
@@ -171,7 +171,7 @@
                 note:"Ratio 1:5. Store in a cool, dark place and label with the date."}}
     ];
     const I={
-        bg:{home:"Начало",products:"Продукти",seasonal:"Сезонни",about:"За мен",contact:"Свържете се",
+        bg:{home:"Начало",herbs:"Билки",seasonal:"Сезонни",about:"За мен",contact:"Свържете се",
             lead:"Личен каталог на лечебни растения и фармакогностични суровини — с латински названия, съставки и календар на беритбата.",
             browse:"Разгледай продуктите",now:"В сезон сега",feat:"Избрани продукти",
             drug:"Дрога",part:"Част",compounds:"Съставки",season:"Беритба",
@@ -182,27 +182,27 @@
             canH:"Какво мога да правя",canP:"Лабораторията ми е насочена към три направления и обхваща следните работи.",
             add:"Добави продукт",addP:"Помощник за добавяне на нови продукти и цветя в каталога — без да пишете код.",
             s1:"Попълнете полетата и отметнете месеците на беритба. Образецът се показва на живо най-отдолу.",s2:"Натиснете „Копирай кода“.",
-            s3:"Изпратете ми копирания код в чата с думите „Добави този продукт“. Ако редактирате файла сами, поставете кода в списъка PRODUCTS, преди затварящата скоба ].",
+            s3:"Изпратете ми копирания код в чата с думите „Добави този продукт“. Ако редактирате файла сами, поставете кода в списъка HERBS, преди затварящата скоба ].",
             rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на продукта във файла.",
             mons:"Месеци на беритба",code:"Готов код",copy:"Копирай кода",copied:"Копирано",prev:"Преглед",use:"Използва се за",
             make:"Правене",makeOf:"Правене на",makeP:"Стъпка по стъпка: как се приготвят препарати от дрогите в каталога.",needK:"Необходимо",stepsK:"Стъпки",
             prepNote:"Методиките са примерни и с учебна цел. Спазвайте лабораторните правила и носете предпазни очила.",
             addMake:"Добави правене",addMakeP:"Попълнете полетата за нова методика — всяка съставка и всяка стъпка на нов ред. Готовият код добавете в списъка PREPS или ми го пратете с „Добави това правене“."},
-        en:{home:"Home",products:"Products",seasonal:"Seasonal",about:"About me",contact:"Contact",
+        en:{home:"Home",herbs:"Herbs",seasonal:"Seasonal",about:"About me",contact:"Contact",
             lead:"A personal catalogue of medicinal plants and pharmacognostic drugs — with Latin names, constituents and a harvest calendar.",
-            browse:"Browse products",now:"In season now",feat:"Featured products",
+            browse:"Browse herbs",now:"In season now",feat:"Featured herbs",
             drug:"Drug",part:"Part used",compounds:"Constituents",season:"Harvest",
-            search:"Search by name or Latin name",none:"No products found. Try another word.",count:"products in the catalogue",
+            search:"Search by name or Latin name",none:"No herbs found. Try another word.",count:"herbs in the catalogue",
             calH:"Harvest calendar",calP:"The months in which each drug is collected. The current month is outlined.",noneNow:"Nothing is in season this month.",
             contactP:"Have a question or a suggestion for a new product? Write to me.",write:"Email me",follow:"Profiles",
             foot:"Content is for educational purposes and does not replace advice from a doctor or pharmacist.",
             canH:"What I can make",canP:"My lab covers three focus areas and the following kinds of work.",
-            add:"Add a product",addP:"A helper for adding new products and flowers to the catalogue — no coding needed.",
+            add:"Add a product",addP:"A helper for adding new herbs and flowers to the catalogue — no coding needed.",
             s1:"Fill in the fields and tick the harvest months. The specimen appears live at the bottom.",s2:"Press “Copy code”.",
-            s3:"Send me the copied code in the chat with the words “Add this product”. If you edit the file yourself, paste the code into the PRODUCTS list, before the closing bracket ].",
+            s3:"Send me the copied code in the chat with the words “Add this product”. If you edit the file yourself, paste the code into the HERBS list, before the closing bracket ].",
             rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the product’s whole block in the file.",
             mons:"Harvest months",code:"Ready code",copy:"Copy code",copied:"Copied",prev:"Preview",use:"Used for",
-            make:"Making",makeOf:"Making",makeP:"Step by step: how to prepare products from the drugs in the catalogue.",needK:"You need",stepsK:"Steps",
+            make:"Making",makeOf:"Making",makeP:"Step by step: how to prepare herbs from the drugs in the catalogue.",needK:"You need",stepsK:"Steps",
             prepNote:"The methods are examples for study purposes. Follow lab rules and wear safety glasses.",
             addMake:"Add a preparation",addMakeP:"Fill in the fields for a new method — one ingredient and one step per line. Add the finished code to the PREPS list or send it to me with “Add this preparation”.",
         }
@@ -215,25 +215,25 @@
     const pad=n=>String(n).padStart(2,"0");
     const range=a=>a.length?mon(Math.min(...a))+"–"+mon(Math.max(...a)):"—";
     const card=(p,i)=>{const c=p[L];return `<article class="card" data-q="${(p.bg.name+" "+p.en.name+" "+p.latin+" "+p.drug).toLowerCase()}"><div class="meta"><span>№ ${pad(i+1)}</span><span>${p.family}</span></div><h3>${c.name}</h3><p class="lat">${p.latin}</p><dl><dt>${t("drug")}</dt><dd><i>${p.drug}</i></dd><dt>${t("part")}</dt><dd>${c.part}</dd><dt>${t("compounds")}</dt><dd>${c.compounds}</dd>${c.use?`<dt>${t("use")}</dt><dd>${c.use}</dd>`:""}<dt>${t("season")}</dt><dd>${range(p.months)}</dd></dl><p>${c.desc}</p></article>`};
-    const cards=list=>`<div class="grid">${list.map(p=>card(p,PRODUCTS.indexOf(p))).join("")}</div>`;
+    const cards=list=>`<div class="grid">${list.map(p=>card(p,HERBS.indexOf(p))).join("")}</div>`;
     const plant=`<svg viewBox="0 0 200 260" aria-hidden="true"><g fill="var(--teal)" fill-opacity=".16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path fill="none" d="M100 252C98 190 104 120 100 30"/><path d="M100 205C70 205 48 188 40 160C70 160 94 176 100 205Z"/><path d="M100 175C130 175 152 158 160 130C130 130 106 146 100 175Z"/><path d="M100 135C74 133 56 118 50 94C76 96 96 110 100 135Z"/><path d="M100 100C124 98 140 84 146 62C122 64 104 76 100 100Z"/><path d="M100 60C88 48 90 28 100 12C110 28 112 48 100 60Z"/></g></svg>`;
 
     const R={
-        home(){const live=PRODUCTS.filter(p=>p.months.includes(now));
-            return `<section class="hero"><div><h1>${L==="bg"?"Хербариум":"Herbarium"}</h1><p class="lead">${t("lead")}</p><a class="btn" href="#products">${t("browse")}</a></div>
-  <div class="plate">${plant}<p>${PRODUCTS[0].latin}</p></div></section>
-  <h2>${live.length?t("now"):t("feat")}</h2>${cards((live.length?live:PRODUCTS).slice(0,3))}`},
-        products(){return `<h1>${t("products")}</h1><p class="lead">${PRODUCTS.length} ${t("count")}</p>
-  <input id="q" type="search" placeholder="${t("search")}" aria-label="${t("search")}">${cards(PRODUCTS)}<p id="none" hidden>${t("none")}</p>`},
-        seasonal(){const live=PRODUCTS.filter(p=>p.months.includes(now)),M=[1,2,3,4,5,6,7,8,9,10,11,12];
+        home(){const live=HERBS.filter(p=>p.months.includes(now));
+            return `<section class="hero"><div><h1>${L==="bg"?"Хербариум":"Herbarium"}</h1><p class="lead">${t("lead")}</p><a class="btn" href="#herbs">${t("browse")}</a></div>
+  <div class="plate">${plant}<p>${HERBS[0].latin}</p></div></section>
+  <h2>${live.length?t("now"):t("feat")}</h2>${cards((live.length?live:HERBS).slice(0,3))}`},
+        herbs(){return `<h1>${t("herbs")}</h1><p class="lead">${HERBS.length} ${t("count")}</p>
+  <input id="q" type="search" placeholder="${t("search")}" aria-label="${t("search")}">${cards(HERBS)}<p id="none" hidden>${t("none")}</p>`},
+        seasonal(){const live=HERBS.filter(p=>p.months.includes(now)),M=[1,2,3,4,5,6,7,8,9,10,11,12];
             return `<h1>${t("seasonal")}</h1><p class="lead">${t("calP")}</p>
   <h2 style="margin-top:8px">${t("now")}</h2>${live.length?cards(live):`<p>${t("noneNow")}</p>`}
   <h2>${t("calH")}</h2><div class="cal"><table><thead><tr><th></th>${M.map(m=>`<th class="${m===now?"now":""}">${mon(m)}</th>`).join("")}</tr></thead><tbody>
-  ${PRODUCTS.map(p=>`<tr><td>${p[L].name}</td>${M.map(m=>`<td class="${p.months.includes(m)?"on":""} ${m===now?"now":""}">${p.months.includes(m)?"●":""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`},
+  ${HERBS.map(p=>`<tr><td>${p[L].name}</td>${M.map(m=>`<td class="${p.months.includes(m)?"on":""} ${m===now?"now":""}">${p.months.includes(m)?"●":""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`},
         about(){const n=SITE.person[L];
             return `<section class="hero"><div><h1>${n}</h1><p class="lat" style="font-size:24px;margin-top:14px">${SITE.role[L]}</p>${SITE.bio[L].map(b=>`<p class="lead" style="margin:16px 0">${b}</p>`).join("")}</div>
   <div class="plate"><div class="mono">${n.split(" ").map(w=>w[0]).join("")}</div><p>${L==="bg"?"Хербариум":"Herbarium"}</p></div></section><h2>${t("canH")}</h2><p class="lead" style="margin:0 0 24px">${t("canP")}</p><div class="grid">${SITE.dirs.map((d,i)=>`<div class="card${i?"":" hl"}"><h3 style="font-size:26px">${d[L].t}</h3><p class="sub">${d[L].d}</p></div>`).join("")}</div><div style="margin-top:36px">${SITE.make.map(m=>`<div class="row"><h3>${m[L].t}</h3><p>${m[L].d}</p></div>`).join("")}</div>`},
-        make(){return `<h1>${t("make")}</h1><p class="lead">${t("makeP")}</p><div class="grid">${PREPS.map((m,i)=>{const c=m[L],p=PRODUCTS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t("makeOf")} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:""}<p class="k">${t("needK")}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join("")}</ul><p class="k">${t("stepsK")}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join("")}</ol><p>${c.note}</p></article>`}).join("")}</div><p class="sub" style="margin-top:28px">${t("prepNote")}</p>`},
+        make(){return `<h1>${t("make")}</h1><p class="lead">${t("makeP")}</p><div class="grid">${PREPS.map((m,i)=>{const c=m[L],p=HERBS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t("makeOf")} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:""}<p class="k">${t("needK")}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join("")}</ul><p class="k">${t("stepsK")}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join("")}</ol><p>${c.note}</p></article>`}).join("")}</div><p class="sub" style="margin-top:28px">${t("prepNote")}</p>`},
         add(){return `<h1>${t("add")}</h1><p class="lead">${t("addP")}</p>
   <ol><li>${t("s1")}</li><li>${t("s2")}</li><li>${t("s3")}</li></ol><p>${t("rm")}</p>
   <div class="form">${FIELDS.map(f=>`<label>${f[L==="bg"?1:2]}<input data-k="${f[0]}" value="${(draft[f[0]]||"").replace(/"/g,"&quot;")}"></label>`).join("")}</div>
@@ -256,7 +256,7 @@
             const p={latin:v("latin"),drug:v("drug"),family:v("family"),months:m,bg:{name:v("nameBg"),part:v("partBg"),compounds:v("compBg"),use:v("useBg"),desc:v("descBg")},en:{name:v("nameEn"),part:v("partEn"),compounds:v("compEn"),use:v("useEn"),desc:v("descEn")}};
             const o=x=>`name:${J(x.name)},part:${J(x.part)},compounds:${J(x.compounds)},use:${J(x.use)},desc:${J(x.desc)}`;
             out.value=` {latin:${J(p.latin)},drug:${J(p.drug)},family:${J(p.family)},months:[${m}],\n  bg:{${o(p.bg)}},\n  en:{${o(p.en)}}},`;
-            $("#pv").innerHTML=card(p,PRODUCTS.length)};
+            $("#pv").innerHTML=card(p,HERBS.length)};
         document.querySelectorAll("[data-k]").forEach(i=>i.oninput=()=>{d[i.dataset.k]=i.value;upd()});
         document.querySelectorAll("[data-m]").forEach(i=>i.onchange=()=>{const m=+i.dataset.m;d.months=d.months.filter(x=>x!==m);if(i.checked)d.months.push(m);upd()});
         $("#cp").onclick=e=>{out.select();try{navigator.clipboard.writeText(out.value)}catch(x){document.execCommand("copy")}e.target.textContent=t("copied");setTimeout(()=>e.target.textContent=t("copy"),1800)};
@@ -274,7 +274,7 @@
         ['stepsEn','Стъпки (английски), по един ред','Steps (English), one per line',1],
         ['noteBg','Бележка (български)','Note (Bulgarian)'],
         ['noteEn','Бележка (английски)','Note (English)']];
-    const prepCard=(m,i)=>{const c=m[L],p=PRODUCTS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t('makeOf')} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:''}<p class="k">${t('needK')}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join('')}</ul><p class="k">${t('stepsK')}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join('')}</ol><p>${c.note}</p></article>`};
+    const prepCard=(m,i)=>{const c=m[L],p=HERBS.find(x=>x.drug===m.drug);return `<article class="card"><div class="meta"><span>№ ${pad(i+1)}</span><span>${m.drug}</span></div><h3>${t('makeOf')} ${c.name}</h3>${p?`<p class="lat">${p[L].name} — ${p.latin}</p>`:''}<p class="k">${t('needK')}</p><ul>${c.need.map(x=>`<li>${x}</li>`).join('')}</ul><p class="k">${t('stepsK')}</p><ol>${c.steps.map(x=>`<li>${x}</li>`).join('')}</ol><p>${c.note}</p></article>`};
     function bindPrep(){
         const J=JSON.stringify,d=draft2,out=$('#out2'),v=k=>(d[k]||'').trim(),ls=k=>(d[k]||'').split('\n').map(x=>x.trim()).filter(Boolean);
         const upd=()=>{const o=s=>({name:v('name'+s),need:ls('need'+s),steps:ls('steps'+s),note:v('note'+s)}),m={drug:v('drug'),bg:o('Bg'),en:o('En')};
@@ -289,7 +289,7 @@
     function render(){
         const k=(location.hash||"#home").slice(1),pg=R[k]?k:"home",name=L==="bg"?"Хербариум":"Herbarium";
         $("#brand").textContent=name;
-        $("#nav").innerHTML=["home","products","seasonal","make","about","contact"].map(p=>`<a href="#${p}" class="${p===pg?"on":""}">${t(p)}</a>`).join("")+`<a href="experiments.html">${L==="bg"?"Експерименти":"Experiments"}</a>`;
+        $("#nav").innerHTML=["home","herbs","seasonal","make","about","contact"].map(p=>`<a href="#${p}" class="${p===pg?"on":""}">${t(p)}</a>`).join("")+`<a href="experiments.html">${L==="bg"?"Експерименти":"Experiments"}</a>`;
         document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
         $("#app").innerHTML=R[pg]();
         $("#foot").innerHTML=`<p>© ${new Date().getFullYear()} ${name}</p><p>${t("foot")}</p><p><a href="#add" style="color:var(--teal)">${t("add")}</a></p>`;
