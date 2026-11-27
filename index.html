@@ -75,8 +75,8 @@
 <script>
     /* =====================================================================
        ✎ РЕДАКТИРАЙТЕ ТУК / EDIT HERE
-       Добавяне на продукт: копирайте един блок в HERBS и сменете текстовете.
-       Махане на продукт: изтрийте целия му блок { ... }.
+       Добавяне на билки: копирайте един блок в HERBS и сменете текстовете.
+       Махане на билки: изтрийте целия му блок { ... }.
        months = месеци на беритба (1 = януари … 12 = декември).
        ===================================================================== */
     const SITE={
@@ -153,7 +153,7 @@
     ];
 
     /* ✎ ПРАВЕНЕ (методики). За нова методика копирайте един блок и сменете текстовете.
-       drug = латинското име на дрогата от HERBS (връзка към продукта); need = списък; steps = стъпки. */
+       drug = латинското име на дрогата от HERBS (връзка към билката); need = списък; steps = стъпки. */
     const PREPS=[
         {drug:"Matricariae flos",
             bg:{name:"запарка от лайка",need:["10 г лайка (Matricariae flos), едро натрошена","100 мл вода","водна баня, везна, цедка"],
@@ -173,17 +173,17 @@
     const I={
         bg:{home:"Начало",herbs:"Билки",seasonal:"Сезонни",about:"За мен",contact:"Свържете се",
             lead:"Личен каталог на лечебни растения и фармакогностични суровини — с латински названия, съставки и календар на беритбата.",
-            browse:"Разгледай продуктите",now:"В сезон сега",feat:"Избрани продукти",
+            browse:"Разгледай билките",now:"В сезон сега",feat:"Избрани билки",
             drug:"Дрога",part:"Част",compounds:"Съставки",season:"Беритба",
-            search:"Търси по име или латинско название",none:"Няма намерени продукти. Опитайте с друга дума.",count:"продукта в каталога",
-            calH:"Календар на беритбата",calP:"Месеците, в които се събира всяка суровина. Текущият месец е очертан.",noneNow:"Този месец няма продукти в сезон.",
-            contactP:"Имате въпрос или предложение за нов продукт? Пишете ми.",write:"Пишете ми на имейл",follow:"Профили",
+            search:"Търси по име или латинско название",none:"Няма намерени билки. Опитайте с друга дума.",count:"билки в каталога",
+            calH:"Календар на беритбата",calP:"Месеците, в които се събира всяка суровина. Текущият месец е очертан.",noneNow:"Този месец няма билки в сезон.",
+            contactP:"Имате въпрос или предложение за нова билки или нещо друго? Пишете ми.",write:"Пишете ми на имейл",follow:"Профили",
             foot:"Съдържанието е с образователна цел и не замества съвет от лекар или фармацевт.",
             canH:"Какво мога да правя",canP:"Лабораторията ми е насочена към три направления и обхваща следните работи.",
-            add:"Добави продукт",addP:"Помощник за добавяне на нови продукти и цветя в каталога — без да пишете код.",
+            add:"Добави билка или правене",addP:"Помощник за добавяне на нови билки и цветя в каталога — без да пишете код.",
             s1:"Попълнете полетата и отметнете месеците на беритба. Образецът се показва на живо най-отдолу.",s2:"Натиснете „Копирай кода“.",
-            s3:"Изпратете ми копирания код в чата с думите „Добави този продукт“. Ако редактирате файла сами, поставете кода в списъка HERBS, преди затварящата скоба ].",
-            rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на продукта във файла.",
+            s3:"Изпратете ми копирания код в чата с думите „Добави тази билка“. Ако редактирате файла сами, поставете кода в списъка HERBS, преди затварящата скоба ].",
+            rm:"За премахване или промяна: напишете ми например „Махни Мента“ или „Смени сезона на Лайка“ — или изтрийте целия блок на билката във файла.",
             mons:"Месеци на беритба",code:"Готов код",copy:"Копирай кода",copied:"Копирано",prev:"Преглед",use:"Използва се за",
             make:"Правене",makeOf:"Правене на",makeP:"Стъпка по стъпка: как се приготвят препарати от дрогите в каталога.",needK:"Необходимо",stepsK:"Стъпки",
             prepNote:"Методиките са примерни и с учебна цел. Спазвайте лабораторните правила и носете предпазни очила.",
@@ -194,13 +194,13 @@
             drug:"Drug",part:"Part used",compounds:"Constituents",season:"Harvest",
             search:"Search by name or Latin name",none:"No herbs found. Try another word.",count:"herbs in the catalogue",
             calH:"Harvest calendar",calP:"The months in which each drug is collected. The current month is outlined.",noneNow:"Nothing is in season this month.",
-            contactP:"Have a question or a suggestion for a new product? Write to me.",write:"Email me",follow:"Profiles",
+            contactP:"Have a question or a suggestion for a new herb or something else? Write to me.",write:"Email me",follow:"Profiles",
             foot:"Content is for educational purposes and does not replace advice from a doctor or pharmacist.",
             canH:"What I can make",canP:"My lab covers three focus areas and the following kinds of work.",
-            add:"Add a product",addP:"A helper for adding new herbs and flowers to the catalogue — no coding needed.",
+            add:"Add a herb or a making",addP:"A helper for adding new herbs and flowers to the catalogue — no coding needed.",
             s1:"Fill in the fields and tick the harvest months. The specimen appears live at the bottom.",s2:"Press “Copy code”.",
-            s3:"Send me the copied code in the chat with the words “Add this product”. If you edit the file yourself, paste the code into the HERBS list, before the closing bracket ].",
-            rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the product’s whole block in the file.",
+            s3:"Send me the copied code in the chat with the words “Add this herb”. If you edit the file yourself, paste the code into the HERBS list, before the closing bracket ].",
+            rm:"To remove or change one: tell me, for example, “Remove Peppermint” or “Change the season of Chamomile” — or delete the herb’s whole block in the file.",
             mons:"Harvest months",code:"Ready code",copy:"Copy code",copied:"Copied",prev:"Preview",use:"Used for",
             make:"Making",makeOf:"Making",makeP:"Step by step: how to prepare herbs from the drugs in the catalogue.",needK:"You need",stepsK:"Steps",
             prepNote:"The methods are examples for study purposes. Follow lab rules and wear safety glasses.",
@@ -265,7 +265,7 @@
 
     const draft2={};
     const FIELDS2=[
-        ['drug','Дрога (латинско име, както в продукта)','Drug (Latin name, as in the product)'],
+        ['drug','Дрога (латинско име, както в билка)','Drug (Latin name, as in the herb)'],
         ['nameBg','Име на методиката (български)','Method name (Bulgarian)'],
         ['nameEn','Име на методиката (английски)','Method name (English)'],
         ['needBg','Необходимо (български), по един ред','You need (Bulgarian), one per line',1],
